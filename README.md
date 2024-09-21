@@ -1,23 +1,71 @@
-# SImple-banking-system
-You have created the foundation of our banking system. Now let's take the opportunity to deposit money into an account, make transfers and close an account if necessary.
+# Simple Banking System with Luhn Algorithm Implementation
 
-Now your menu should look like this:
+This is a simple banking system implemented in Python using SQLite. It allows users to create bank accounts, log in, check their balance, add income, transfer money, and close accounts. 
 
-1. Balance
-2. Add income
-3. Do transfer
-4. Close account
-5. Log out
+**Key Feature:** This system utilizes the Luhn algorithm to generate and validate credit card numbers, ensuring the integrity of account information.
+
+## Features
+
+- **Account Creation:** Generates a unique 16-digit card number with a 4-digit PIN. 
+    - **Luhn Algorithm:** The system employs the Luhn algorithm to generate valid credit card numbers, enhancing the realism and security of the application.
+- **Login:** Securely logs in users using their card number and PIN.
+- **Balance Check:** Displays the current account balance.
+- **Add Income:** Allows users to deposit funds into their account.
+- **Money Transfer:** Enables users to transfer funds to other accounts within the system.
+    - **Luhn Validation:** Before processing a transfer, the system validates the recipient's card number using the Luhn algorithm, preventing transfers to invalid accounts.
+- **Account Closure:** Allows users to close their account.
+- **Data Persistence:** Stores account information in an SQLite database.
+
+## Requirements
+
+- Python 3.x
+- SQLite3
+
+## How to Run
+
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/your-username/simple-banking-system.git
+
+2. **Navigate to the project directory:**
+
+  ```bash
+  cd simple-banking-system
+  ```
+3. **Run the script:**
+
+```bash
+python banking.py 
+```
+## Usage
+
+The program presents a menu-driven interface. Follow the on-screen prompts to create an account, log in, and perform various banking operations.
+
+## Database
+
+The program creates an SQLite database named card.s3db to store account information. The database has a single table named card with the following columns:
+
+- **id**: Integer, primary key, auto-incrementing
+- **number**: Text, unique card number
+- **pin**: Text, 4-digit PIN
+- **balance**: Integer, account balance (default 0)
+
+## Luhn Algorithm
+- The Luhn algorithm (also known as the "modulus 10" or "mod 10" algorithm) is a simple checksum formula used to validate a variety of identification numbers, such as credit card numbers. This system uses the Luhn algorithm in two ways:
+
+  - **Card Number Generation**: During account creation, the system generates a random card number prefix and then calculates the appropriate check digit using the Luhn algorithm to create a valid card number.
+  - **Card Number Validation**: When a user enters a card number for a transfer, the system uses the Luhn algorithm to verify that the card number is valid, helping to prevent errors and fraud.
+
+## Example
+
+1. Create an account
+2. Log into account
 0. Exit
-If the user asks for Balance, you should read the balance of the account from the database and output it into the console.
 
-Add income item should allow us to deposit money to the account.
+## Note
 
-Do transfer item should allow transferring money to another account. You should handle the following errors:
+This project is for educational purposes and should not be used as a real-world banking system.
 
-If the user tries to transfer more money than he/she has, output: "Not enough money!"
-If the user tries to transfer money to the same account, output the following message: “You can't transfer money to the same account!”
-If the receiver's card number doesn’t pass the Luhn algorithm, you should output: “Probably you made a mistake in the card number. Please try again!”
-If the receiver's card number doesn’t exist, you should output: “Such a card does not exist.”
-If there is no error, ask the user how much money they want to transfer and make the transaction.
-If the user chooses the Close account item, you should delete that account from the database.
+## License
+This project is licensed under the MIT License - see the LICENSE file for details.
+```
